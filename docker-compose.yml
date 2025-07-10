@@ -10,7 +10,8 @@ services:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_CLIENT_TIME: 2000
     networks:
-      - clickhouse-network
+      clickhouse-network:
+        ipv4_address: 172.168.56.102
 
   clickhouse01:
     image: clickhouse/clickhouse-server:23.1
@@ -26,24 +27,31 @@ services:
     depends_on:
       - zookeeper
     networks:
-      - clickhouse-network
+      clickhouse-network:
+        ipv4_address: 172.168.56.102
 
   clickhouse02:
     image: clickhouse/clickhouse-server:23.1
     container_name: clickhouse02
     hostname: clickhouse02
     ports:
-      - "9000:9000"
-      - "8123:8123"
-      - "9009:9009"
+      - "9001:9000"
+      - "8124:8123"
+      - "9010:9009"
     volumes:
       - ./clickhouse02/etc/clickhouse-server:/etc/clickhouse-server
       - ./clickhouse02/data:/var/lib/clickhouse
+    depends_on:
+      - zookeeper
     networks:
-      - clickhouse-network
+      clickhouse-network:
+        ipv4_address: 172.168.56.101
 
 networks:
   clickhouse-network:
-    driver: bridge
+    name: clickhouse-network
+    ipam:
+      config:
+        - subnet: 172.168.56.0/24
 
 
