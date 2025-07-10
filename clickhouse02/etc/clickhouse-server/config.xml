@@ -57,7 +57,7 @@
 
     <macros>
         <cluster>company_cluster</cluster>
-        <shard>1</shard>
+        <shard>01</shard>
         <replica>clickhouse02</replica>
     </macros>
 
