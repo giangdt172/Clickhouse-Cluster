@@ -1,0 +1,49 @@
+version: '3.8'
+services:
+  zookeeper:
+    image: zookeeper
+    restart: always
+    hostname: zookeeper
+    ports: 
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_CLIENT_TIME: 2000
+    networks:
+      - clickhouse-network
+
+  clickhouse01:
+    image: clickhouse/clickhouse-server:23.1
+    container_name: clickhouse01
+    hostname: clickhouse01
+    ports:
+      - "9000:9000"
+      - "8123:8123"      
+      - "9009:9009"
+    volumes:
+      - ./clickhouse01/etc/clickhouse-server:/etc/clickhouse-server
+      - ./clickhouse01/data:/var/lib/clickhouse
+    depends_on:
+      - zookeeper
+    networks:
+      - clickhouse-network
+
+  clickhouse02:
+    image: clickhouse/clickhouse-server:23.1
+    container_name: clickhouse02
+    hostname: clickhouse02
+    ports:
+      - "9000:9000"
+      - "8123:8123"
+      - "9009:9009"
+    volumes:
+      - ./clickhouse02/etc/clickhouse-server:/etc/clickhouse-server
+      - ./clickhouse02/data:/var/lib/clickhouse
+    networks:
+      - clickhouse-network
+
+networks:
+  clickhouse-network:
+    driver: bridge
+
+
