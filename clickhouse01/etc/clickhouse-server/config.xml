@@ -37,11 +37,13 @@
         <company_cluster>
             <shard>
                 <replica>
-                    <host>192.168.56.102</host>
+                    <host>172.168.56.102</host>
                     <port>9000</port>
                 </replica>
+            </shard>
+            <shard>
                 <replica>
-                    <host>192.168.56.101</host>
+                    <host>172.168.56.101</host>
                     <port>9000</port>
                 </replica>
             </shard>
@@ -50,7 +52,7 @@
 
     <zookeeper>
         <node>
-            <host>192.168.56.102</host>
+            <host>172.168.56.102</host>
             <port>2181</port>
         </node>
     </zookeeper>

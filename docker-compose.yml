@@ -11,7 +11,7 @@ services:
       ZOOKEEPER_CLIENT_TIME: 2000
     networks:
       clickhouse-network:
-        ipv4_address: 172.168.56.102
+        ipv4_address: 172.168.56.103
 
   clickhouse01:
     image: clickhouse/clickhouse-server:23.1
@@ -36,7 +36,7 @@ services:
     hostname: clickhouse02
     ports:
       - "9001:9000"
-      - "8124:8123"
+      - "8124:8123"      
       - "9010:9009"
     volumes:
       - ./clickhouse02/etc/clickhouse-server:/etc/clickhouse-server
