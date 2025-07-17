@@ -1,0 +1,13 @@
+<clickhouse>
+  <users>
+    <default>
+      <password><![CDATA[admin123]]></password>
+      <profile>default</profile>
+      <quota>default</quota>
+      <networks>
+        <ip>::/0</ip> <!-- Cho phép truy cập từ tất cả IP -->
+      </networks>
+      <access_management>1</access_management> <!-- Cho phép quản lý user qua SQL -->
+    </default>
+  </users>
+</clickhouse>
