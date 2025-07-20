@@ -1,0 +1,11 @@
+services:
+  clickhouse02:
+    image: yandex/clickhouse-server
+    container_name: clickhouse02
+    ports:
+      - "8123:8123"
+      - "9000:9000"
+      - "9009:9009"
+    volumes:
+      - ./config.xml:/etc/clickhouse-server/config.xml
+    restart: always

@@ -1,0 +1,20 @@
+services:
+  zookeeper:
+    image: zookeeper
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
+    restart: always
+
+  clickhouse01:
+    image: yandex/clickhouse-server
+    container_name: clickhouse01
+    ports:
+      - "8123:8123"
+      - "9000:9000"
+      - "9009:9009"
+    volumes:
+      - ./config.xml:/etc/clickhouse-server/config.xml
+    depends_on:
+      - zookeeper
+    restart: always
